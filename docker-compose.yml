@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    image: todoapp:1.0
+    build: 
+     context: .
+     dockerfile: Dockerfile
+    container_name: todoapp_container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    restart: unless-stopped
+  
+  mysql:
+   image: my-sql:latest
+   build:
+     context: .
+     dockerfile: Dockerfile.mysql
+   container_name: my-sql
+   ports:
+     - "3306:3306"
+   volumes:
+     - db-data:/var/lib/mysql
+    
+volumes:
+  db_data:
+
+networks:
+  todoapp_network:
+    driver: bridge
