@@ -14,7 +14,7 @@ services:
       - DB_PASSWORD=1234
       - DB_PORT=3306
     depends_on:
-      -mysql:
+      mysql:
        condition: service_healthy
     restart: unless-stopped
     networks:
